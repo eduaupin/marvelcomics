@@ -12,7 +12,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIService {
-    private static final String BASE_URL = "https://gateway.marvel.com:443/v1/public/";
+    private static final String BASE_URL = "https://gateway.marvel.com/v1/public/";
     private static Retrofit retrofit;
 
     private static Retrofit getRetrofit() {

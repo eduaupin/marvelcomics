@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -14,12 +15,13 @@ import android.widget.ProgressBar;
 import com.example.desafiomarvel.R;
 import com.example.desafiomarvel.model.Result;
 import com.example.desafiomarvel.view.adapters.QuadrinhoAdapter;
+import com.example.desafiomarvel.view.interfaces.ComicsOnClick;
 import com.example.desafiomarvel.viewmodel.HomeViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements ComicsOnClick {
     private RecyclerView recyclerView;
     private QuadrinhoAdapter adapter;
     private HomeViewModel viewModel;
@@ -62,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
     public void initViews(){
         recyclerView = findViewById(R.id.recycler);
         progressBar = findViewById(R.id.progress_bar);
-        adapter = new QuadrinhoAdapter(listaDeQuadrinhos);
+        adapter = new QuadrinhoAdapter(listaDeQuadrinhos, this);
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
     }
 
@@ -70,5 +72,14 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.homemenu, menu);
         return true;
+    }
+
+    @Override
+    public void OnClick(Result result) {
+        Intent intent = new Intent(this, QuadrinhoDetalheActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("chave", result);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

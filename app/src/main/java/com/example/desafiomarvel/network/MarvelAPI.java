@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 public interface MarvelAPI {
 
     @GET("comics")
-    Observable<ComicsResponse> getAllComics(@Query("Format")String format,
+    Observable<ComicsResponse> getAllComics(@Query("format")String format,
                                             @Query("formatType") String formatType,
                                             @Query("noVariants") boolean noVariants,
                                             @Query("orderBy") String orderBy,

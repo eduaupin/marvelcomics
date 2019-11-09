@@ -12,9 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.HomeActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:label=""></activity>
+        <activity android:name=".view.activity.QuadrinhoDetalheActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity
+            android:name=".view.activity.HomeActivity"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".view.activity.RegistroActivity"
             android:icon="@drawable/ic_action_back"

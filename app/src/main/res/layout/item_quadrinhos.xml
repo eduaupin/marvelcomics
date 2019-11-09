@@ -3,11 +3,13 @@
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="10dp"
+    android:layout_marginLeft="16dp"
     android:background="#00162C">
     <ImageView
         android:id="@+id/imgQuadrinho"
         android:layout_width="100dp"
         android:layout_height="150dp"
+
         android:padding="5dp"
         android:backgroundTint="@android:color/white"
         android:src="@drawable/imagemlogo"

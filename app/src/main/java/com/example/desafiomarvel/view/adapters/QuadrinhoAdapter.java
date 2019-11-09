@@ -12,15 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.desafiomarvel.R;
 import com.example.desafiomarvel.model.Result;
+import com.example.desafiomarvel.view.interfaces.ComicsOnClick;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class QuadrinhoAdapter extends RecyclerView.Adapter<QuadrinhoAdapter.ViewHolder> {
     private List<Result> listaDeQuadrinhos;
+    private ComicsOnClick listener;
 
-    public QuadrinhoAdapter(List<Result> listaDeQuadrinhos) {
+    public QuadrinhoAdapter(List<Result> listaDeQuadrinhos, ComicsOnClick listener) {
         this.listaDeQuadrinhos = listaDeQuadrinhos;
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,6 +38,11 @@ public class QuadrinhoAdapter extends RecyclerView.Adapter<QuadrinhoAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Result result = listaDeQuadrinhos.get(position);
         holder.onBind(result);
+
+        holder.itemView.setOnClickListener(view ->{
+            listener.OnClick(result);
+        });
+
     }
 
     @Override
@@ -61,9 +69,9 @@ public class QuadrinhoAdapter extends RecyclerView.Adapter<QuadrinhoAdapter.View
 
         public void onBind(Result result){
             Picasso.get()
-                    .load(result.getThumbnail().getPath())
+                    .load(result.getThumbnail().getPath()+ ".jpg")
                     .into(fotoQadrinho);
-            numQuadrinho.setText(result.getId());
+            numQuadrinho.setText("#" + result.getId());
         }
 
     }

@@ -8,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.desafiomarvel.model.ComicsResponse;
 import com.example.desafiomarvel.model.Result;
 import com.example.desafiomarvel.repository.ComicsRepository;
 
@@ -16,7 +15,6 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.example.desafiomarvel.util.AppUtils.md5;
@@ -27,8 +25,8 @@ public class HomeViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private ComicsRepository repository = new ComicsRepository();
 
-    public static final String PRIMARY_KEY = "6eb7e8896ec5850c52515a8a23ee97f0";
-    public static final String PRIVATE_KEY = "0dd0c16fedb8a02985977eafca66b49f5e6a526f";
+    public static final String PRIMARY_KEY = "fe81c0a4bd6c7f00e3df25d68d8d8a92";
+    public static final String PRIVATE_KEY = "ceac13aef2089eaf3c704ba9da60cf2156b60912";
 
     String ts = Long.toString(System.currentTimeMillis()/1000);
 
@@ -50,7 +48,7 @@ public class HomeViewModel extends AndroidViewModel {
         disposable.add(
                 repository.getComics("magazine", "comic",
                         true, "focDate", ts, hash, PRIMARY_KEY)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                         .doOnSubscribe(disposable1 -> {
                             loading.setValue(true);
