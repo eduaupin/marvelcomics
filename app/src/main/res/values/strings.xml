@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">DesafioMarvel</string>
+    <string name="login">Login</string>
+    <string name="nome">Nome</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="registrese">Não possui uma conta? <b>Registre-se!</b></string>
+    <string name="loginRegistro">Já possui uma conta? <b>Logue-se!</b></string>
+    <string name="registrar">Registrar</string>
+    <string name="numQuadrinho"><b>#00</b></string>
+</resources>
