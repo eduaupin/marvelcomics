@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.desafiomarvel.R;
+import com.example.desafiomarvel.model.Date;
+import com.example.desafiomarvel.model.Price;
 import com.example.desafiomarvel.model.Result;
 import com.squareup.picasso.Picasso;
 
@@ -39,14 +41,14 @@ public class QuadrinhoDetalheActivity extends AppCompatActivity {
             Bundle bundle = intent.getExtras();
             Result result = bundle.getParcelable("chave");
 
-//            Picasso.get()
-//                    .load(result.getThumbnail().getPath() + ".jpg").into(imagemDestaque);
-//            Picasso.get()
-//                    .load(result.getImages()+ ".jpg").into(imagemHQ);
+            Picasso.get()
+                    .load(result.getThumbnail().getPath() + ".jpg").into(imagemDestaque);
+            Picasso.get()
+                    .load(result.getThumbnail().getPath()+ ".jpg").into(imagemHQ);
             titleHQ.setText(result.getTitle());
             descHQ.setText(result.getDescription());
-            publicHQ.setText("Publicado em: " + result.getDates());
-            priceHQ.setText("Preço: "+ result.getPrices());
+            publicHQ.setText("Publicado em: " + result.getDates().get(0).getDate());
+            priceHQ.setText("Preço: R$"+ result.getPrices().get(0).getPrice());
             pagesHQ.setText("Páginas: " + result.getPageCount());
 
         }

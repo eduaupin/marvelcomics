@@ -9,6 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.desafiomarvel.R;
+import com.example.desafiomarvel.data.CadastroDao;
+import com.example.desafiomarvel.data.Database;
+import com.example.desafiomarvel.model.Cadastro;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
@@ -17,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout inputSenha;
     private Button btnLogin;
     private TextView btnRegistro;
-
+    private CadastroDao cadastroDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +29,37 @@ public class LoginActivity extends AppCompatActivity {
         initViews();
 
 
-            btnLogin.setOnClickListener(view->{
-                if(!inputEmail.getEditText().getText().toString().isEmpty() &&
-                        !inputSenha.getEditText().getText().toString().isEmpty()){
+//            btnLogin.setOnClickListener(view->{
+//                new Thread(()->{
+//                    if(!inputEmail.getEditText().getText().toString().isEmpty() &&
+//                            !inputSenha.getEditText().getText().toString().isEmpty()){
+//
+//                        String email = inputEmail.getEditText().getText().toString();
+//                        cadastroDao.getByEmail(email);
+//
+//                        Cadastro cadastro = new Cadastro("u", email, "s");
+//
+//                        if(email == cadastro.getEmailUser()) {
+//
+//                            Intent intent = new Intent(this, HomeActivity.class);
+//                            startActivity(intent);
+//                        }
+//
+//                    }else{
+//                        Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).start();
+//            });
+
+        btnLogin.setOnClickListener(view->{
+            if(!inputEmail.getEditText().getText().toString().isEmpty() &&
+                    !inputSenha.getEditText().getText().toString().isEmpty()){
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
-                }
-            });
+            }else{
+                Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnRegistro.setOnClickListener(view ->{
             Intent intent = new Intent(this, RegistroActivity.class);
@@ -47,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         inputSenha = findViewById(R.id.inputSenhaRegistro);
         btnLogin = findViewById(R.id.buttonLogin);
         btnRegistro = findViewById(R.id.loginButtonCadastrese);
+
+        cadastroDao = Database.getDatabase(this).cadastroDao();
     }
 
 }

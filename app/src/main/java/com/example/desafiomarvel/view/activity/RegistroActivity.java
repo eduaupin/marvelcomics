@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.desafiomarvel.R;
+import com.example.desafiomarvel.data.CadastroDao;
+import com.example.desafiomarvel.data.Database;
+import com.example.desafiomarvel.model.Cadastro;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class RegistroActivity extends AppCompatActivity {
@@ -20,6 +23,7 @@ public class RegistroActivity extends AppCompatActivity {
     private TextInputLayout inputNome;
     private Button btnRegistro;
     private TextView btnLogin;
+    private CadastroDao cadastroDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +38,30 @@ public class RegistroActivity extends AppCompatActivity {
 
             btnRegistro.setOnClickListener(view->{
 
-                if(!inputEmail.getEditText().getText().toString().isEmpty() &&
-                        !inputSenha.getEditText().getText().toString().isEmpty() &&
-                        !inputNome.getEditText().getText().toString().isEmpty()){
+                new Thread(() ->{
+                    if(!inputEmail.getEditText().getText().toString().isEmpty() &&
+                            !inputSenha.getEditText().getText().toString().isEmpty() &&
+                            !inputNome.getEditText().getText().toString().isEmpty()){
 
-                        Intent intent = new Intent(this, HomeActivity.class);
+                        String nome = inputNome.getEditText().getText().toString();
+                        String email = inputEmail.getEditText().getText().toString();
+                        String senha = inputSenha.getEditText().getText().toString();
+
+                        Cadastro cadastro = new Cadastro(nome,senha, email);
+
+                        if(cadastro != null){
+                            cadastroDao.insereCadastro(cadastro);
+                        }
+
+                        Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);
 
-                }else{
-                    Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
-                }
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }).start();
+
 
             });
 
@@ -59,6 +77,8 @@ public class RegistroActivity extends AppCompatActivity {
         inputNome = findViewById(R.id.cadastroInputNomeRegistro);
         btnRegistro = findViewById(R.id.cadatroButtonCadastro);
         btnLogin = findViewById(R.id.CadastroButtonLogin);
+
+        cadastroDao = Database.getDatabase(this).cadastroDao();
     }
 
     @Override

@@ -69,19 +69,24 @@ public class Result implements Parcelable {
     @Expose
     private List<Variant> variants;
 
+
     protected Result(Parcel in) {
+        dates = in.createTypedArrayList(Date.CREATOR);
         description = in.readString();
         diamondCode = in.readString();
         digitalId = in.readString();
         ean = in.readString();
         format = in.readString();
         id = in.readString();
+        images = in.createTypedArrayList(Image.CREATOR);
         isbn = in.readString();
         issn = in.readString();
         issueNumber = in.readString();
         modified = in.readString();
         pageCount = in.readString();
+        prices = in.createTypedArrayList(Price.CREATOR);
         resourceURI = in.readString();
+        thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
         title = in.readString();
         upc = in.readString();
         variantDescription = in.readString();
@@ -338,20 +343,27 @@ public class Result implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeTypedList(dates);
         dest.writeString(description);
         dest.writeString(diamondCode);
         dest.writeString(digitalId);
         dest.writeString(ean);
         dest.writeString(format);
         dest.writeString(id);
+        dest.writeTypedList(images);
         dest.writeString(isbn);
         dest.writeString(issn);
         dest.writeString(issueNumber);
         dest.writeString(modified);
         dest.writeString(pageCount);
+        dest.writeTypedList(prices);
         dest.writeString(resourceURI);
+        dest.writeParcelable(thumbnail, flags);
         dest.writeString(title);
         dest.writeString(upc);
         dest.writeString(variantDescription);
     }
+
+
 }
