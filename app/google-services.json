@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "969278942556",
+    "firebase_url": "https://desafiomarvel-ae862.firebaseio.com",
+    "project_id": "desafiomarvel-ae862",
+    "storage_bucket": "desafiomarvel-ae862.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969278942556:android:64d14aaff9ebffc4456599",
+        "android_client_info": {
+          "package_name": "com.example.desafiomarvel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969278942556-admfhj5r4tfk6gqc1901fg0il9s5hifm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.desafiomarvel",
+            "certificate_hash": "6e205ec8bab6170cc3aacc71b5842a8156fc810e"
+          }
+        },
+        {
+          "client_id": "969278942556-q1i46pegfs1vv29d12lgj65n19l0ahg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgLlPy6--L1FB8EfzR6r7HokjpyTtGh2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969278942556-q1i46pegfs1vv29d12lgj65n19l0ahg4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
