@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "969278942556-o5irbav0k1b7fb44lelig38cnpggdmhe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.desafiomarvel",
+            "certificate_hash": "ff5eef0b187632746f02ea6f9b9bc487c7b64355"
+          }
+        },
+        {
           "client_id": "969278942556-admfhj5r4tfk6gqc1901fg0il9s5hifm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

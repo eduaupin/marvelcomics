@@ -45,30 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
         initViews();
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
+        loginGoogle();
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-        googleSignInButton.setOnClickListener(view ->{
-            Intent signInIntent = googleSignInClient.getSignInIntent();
-
-            startActivityForResult(signInIntent, 101);
-        });
-
-//            btnLogin.setOnClickListener(view->{
-//                new Thread(()->{
-//                    if(!inputEmail.getEditText().getText().toString().isEmpty() &&
-//                        !inputSenha.getEditText().getText().toString().isEmpty()){
-//                            pegaCadastro();
-//                    }else{
-//                        Toast.makeText(getApplicationContext(),
-//                                "Preencha todos os campos!",
-//                                    Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                }).start();
-//            });
 
         btnLogin.setOnClickListener(view->{
             if(!inputEmail.getEditText().getText().toString().isEmpty() &&
@@ -99,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         GoogleSignInAccount conta = task.getResult(ApiException.class);
                         concluirLogin(conta);
+
                     }catch (ApiException e){
                         Log.i("LOG", "Error: " + e.getMessage());
 
@@ -111,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    private void concluirLogin(GoogleSignInAccount conta) {
+    public void concluirLogin(GoogleSignInAccount conta) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra(GOOGLE_ACCOUNT, conta);
         startActivity(intent);
@@ -127,9 +106,22 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Você já está logadp", Toast.LENGTH_SHORT).show();
             concluirLogin(alreadyLoggedAccount);
         }else{
-            Toast.makeText(this, "Entre em alguma conta", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Faça o login no app :)", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void loginGoogle(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        googleSignInButton.setOnClickListener(view ->{
+            Intent signInIntent = googleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, 101);
+        });
     }
 
     public void initViews(){
@@ -141,20 +133,7 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInButton = findViewById(R.id.sign_in_button);
     }
 
-    private void pegaCadastro(){
-        cadastroDao.pegaCadastro()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(cadastro -> {
-                    if(cadastro.getEmailUser() == inputEmail.getEditText().getText().toString() &&
-                    cadastro.getSenhaUser() == inputSenha.getEditText().getText().toString()){
-                        Intent intent = new Intent(this, HomeActivity.class);
-                        startActivity(intent);
-                    }
-                }, throwable -> {
-                    Log.i("TAG", "erro" + throwable.getMessage());
-                });
-    }
+
 
 
 
